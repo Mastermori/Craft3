@@ -1,5 +1,7 @@
 extends Area2D
 
+signal placed(position)
+
 var highlight := false setget set_highlight
 
 var clicked := false
@@ -61,6 +63,7 @@ func deselect():
 	if highlight:
 		anim_player.play("highlight")
 	clicked = false
+	emit_signal("placed", position)
 	tween.interpolate_property(self, "position", position, start_position, .3, Tween.TRANS_CUBIC)
 	tween.start()
 
